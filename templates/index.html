@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Steam Deal Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=3">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <h1>Steam Deal Finder</h1>
+          <p>Harga regional Indonesia untuk game Steam, diskon maupun harga normal.</p>
+        </div>
+        <div class="status-pill" id="resultCount">Siap</div>
+      </header>
+
+      <section class="search-panel" aria-label="Filter pencarian">
+        <form id="searchForm" class="search-form">
+          <label class="field field-wide">
+            <span>Judul game</span>
+            <input
+              id="query"
+              name="query"
+              type="search"
+              placeholder="Contoh: hollow knight"
+              autocomplete="off"
+            >
+          </label>
+
+          <label class="field">
+            <span>Genre / tag</span>
+            <select id="genreTag" name="tag_id">
+              <option value="">Semua genre</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Harga minimum</span>
+            <input id="minPrice" name="min_price" type="number" min="0" step="5000" placeholder="0">
+          </label>
+
+          <label class="field">
+            <span>Harga maksimum</span>
+            <input id="maxPrice" name="max_price" type="number" min="0" step="5000" value="100000">
+          </label>
+
+          <label class="field">
+            <span>Diskon minimum</span>
+            <input id="minDiscount" name="min_discount" type="number" min="0" max="100" step="5" placeholder="Kosong = semua">
+          </label>
+
+          <button id="searchButton" class="search-button" type="submit">
+            <span aria-hidden="true">⌕</span>
+            Cari Game
+          </button>
+        </form>
+      </section>
+
+      <section class="message-bar" id="messageBar" role="status">
+        Atur filter lalu cari game.
+      </section>
+
+      <section class="results-grid" id="resultsGrid" aria-live="polite"></section>
+    </main>
+
+    <template id="gameCardTemplate">
+      <article class="game-card">
+        <img class="game-image" alt="">
+        <div class="game-content">
+          <div class="game-title-row">
+            <h2 class="game-title"></h2>
+            <span class="discount-badge"></span>
+          </div>
+          <div class="price-row">
+            <span class="initial-price"></span>
+            <strong class="final-price"></strong>
+          </div>
+          <a class="steam-link" target="_blank" rel="noopener noreferrer">Buka di Steam</a>
+        </div>
+      </article>
+    </template>
+
+    <script src="{{ url_for('static', filename='app.js') }}?v=4"></script>
+  </body>
+</html>
